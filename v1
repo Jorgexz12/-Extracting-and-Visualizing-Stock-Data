@@ -1,0 +1,35 @@
+import yfinance as yf
+import pandas as pd
+import requests
+from bs4 import BeautifulSoup
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import nbformat
+
+def make_graph(data, title):
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=data['Date'], y=data['Close'], mode='lines', name='Close'))
+    fig.update_layout(title=title, xaxis_title='Date', yaxis_title='Price (USD)')
+    fig.show()
+tesla = yf.Ticker("TSLA")
+tesla_data = tesla.history(period="max")
+
+tesla_data.reset_index(inplace=True)
+
+tesla_revenue = tesla_data.tail(30)  
+
+make_graph(tesla_data, 'Tesla Stock Data Graph')
+
+  def make_graph(data, title):
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=data['Date'], y=data['Close'], mode='lines', name='Close'))
+    fig.update_layout(title=title, xaxis_title='Date', yaxis_title='Price (USD)')
+    fig.show()
+
+gme=yf.Ticker('GME')
+gme_data = gme.history(period="max")
+
+gme_data.reset_index(inplace=True)
+
+
+make_graph(gme_data, 'GME Stock Data Graph')
